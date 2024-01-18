@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter } from 'react-router-dom';
+import styled from 'styled-components';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import RoutingPage from './pages/RoutingPage';
 
 function App() {
+  const queryClinet = new QueryClient();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <QueryClientProvider client={queryClinet}>
+        <BrowserRouter>
+          <RoutingPage />
+        </BrowserRouter>
+      </QueryClientProvider>
+    </Container>
   );
 }
 
 export default App;
+
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
