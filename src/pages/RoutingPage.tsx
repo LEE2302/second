@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+
 import Home from './Home';
 import CompletePage from './CompletePage';
 import ErrorPage from './ErrorPage';
@@ -14,6 +15,7 @@ function RoutingPage() {
   const location = useLocation();
   const [condition, setCondition] = useState(false);
 
+  // '/order'에서만 헤더와 주문하기 푸터가 보이도록 설정
   useEffect(() => {
     if (pathname === '/order') {
       setCondition(true);

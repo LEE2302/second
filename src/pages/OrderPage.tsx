@@ -17,22 +17,27 @@ interface ItemProps {
 }
 
 function OrderPage() {
+  // 전역상태 가져오기
   const { items, setItems } = useQuantityPriceStroe();
 
-  const { data, isPending, isError } = useQuery({
+  // http get요청
+  const { data, isPending } = useQuery({
     queryKey: ['items'],
     queryFn: ({ signal }) => getEvent({ signal }),
   });
 
-  // 데이터 쥬스탠드 상태에 넣기
+  // get응답 데이터 전역상태에 넣기
   useEffect(() => {
     setItems(data);
   }, [setItems, data]);
 
+  // 데이터 로딩 페이지
+  if (isPending) {
+    return <LoadingText />;
+  }
+
   return (
     <Container>
-      {isPending && <LoadingText />}
-      {isError && <LoadingText text="불러오기에 실패했습니다." />}
       <ul>
         {items
           && items.map((item: ItemProps) => (

@@ -12,6 +12,7 @@ function QuantityPrice({ price, id, quantity }: QuantityPriceProps) {
   // 정규식 사용해서 천단위 ,(콤마) 추가
   const priceRgb = price && price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
+  // 전역상태 가져오기
   const { plusQuantity, minusQuantity } = useQuantityPriceStroe();
 
   return (
