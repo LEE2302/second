@@ -41,4 +41,8 @@ export default RoutingPage;
 const Container = styled.div`
   width: 350px;
   height: 864px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
