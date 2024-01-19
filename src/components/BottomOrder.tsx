@@ -8,7 +8,10 @@ interface ButtonProps {
 }
 
 function BottomOrder() {
-  const { totalQuantity, totalPrice } = useQuantityPriceStroe();
+  const {
+    totalQuantity, totalPrice, setTotalQuantity, setTotalPrice,
+  } = useQuantityPriceStroe();
+  // console.log(totalQuantity);
   const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
 
@@ -20,8 +23,17 @@ function BottomOrder() {
   function orderButtonHandler() {
     setLoading(true);
     // 주문 요청 성공테스트: true변경/ 실패테스트: false로 변경하면 됩니다.
-    setIsSuccess(true);
+    setTimeout(() => {
+      // 2초 후에 setIsSuccess를 호출
+      setIsSuccess(true);
+    }, 2000);
   }
+
+  // 처음 들어올떄 && 다시 돌아올떄 총 수량/가격 초기화
+  useEffect(() => {
+    setTotalQuantity(0);
+    setTotalPrice(0);
+  }, []);
 
   useEffect(() => {
     if (loading) {
@@ -33,7 +45,7 @@ function BottomOrder() {
         navigate('/error');
       }
     }
-  }, [loading]);
+  }, [isSuccess]);
 
   return (
     <Container>

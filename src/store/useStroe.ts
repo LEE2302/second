@@ -16,6 +16,8 @@ interface UseQuantityPriceStroeProps {
   setItems: (items: ItemsPros[]) => void;
   plusQuantity: (itmeId: string) => void;
   minusQuantity: (itmeId: string) => void;
+  setTotalQuantity: (totalQuantity: number) => void;
+  setTotalPrice: (totalPrice: number) => void;
 }
 
 const useQuantityPriceStroe = create<UseQuantityPriceStroeProps>((set) => ({
@@ -26,6 +28,8 @@ const useQuantityPriceStroe = create<UseQuantityPriceStroeProps>((set) => ({
   totalPrice: 0,
 
   //   액션 설정
+  setTotalQuantity: (totalQuantity: number) => set({ totalQuantity }),
+  setTotalPrice: (totalPrice: number) => set({ totalPrice }),
   setItems: (items: ItemsPros[]) => set({ items }),
   // 플러스 버튼 클릭시 실행되는 액션 함수 => 매개변수로 Id를 받아온다.
   plusQuantity: (itemId: string) => set((state) => {
