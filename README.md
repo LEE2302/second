@@ -24,3 +24,6 @@
 주문이 실패했을 때 노출되는 페이지 입니다.
 [O] 3초 뒤에 다시 /order 페이지로 돌아가야 합니다.
 ```
+# 사용 스택
+
+HTML, CSS, JavaScript, TypeScript, React, Styled-components, Zustand, Axios, ESlint
