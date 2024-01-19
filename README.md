@@ -24,6 +24,15 @@
 주문이 실패했을 때 노출되는 페이지 입니다.
 [O] 3초 뒤에 다시 /order 페이지로 돌아가야 합니다.
 ```
+---
+
 # 사용 스택
 
 HTML, CSS, JavaScript, TypeScript, React, Styled-components, Zustand, Axios, ESlint
+
+---
+
+# 시현
+![1-ezgif com-video-to-gif-converter](https://github.com/LEE2302/second/assets/104414924/1464883c-aa75-43b4-a05a-fea04eff1043)
+![2-ezgif com-video-to-gif-converter](https://github.com/LEE2302/second/assets/104414924/a7e9e3b6-0b10-4d09-8042-5c851aa17fe8)
+![3-ezgif com-video-to-gif-converter](https://github.com/LEE2302/second/assets/104414924/6f45e960-3b94-479c-adb9-17e32dcef2df)
