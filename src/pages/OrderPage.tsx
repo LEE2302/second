@@ -1,9 +1,11 @@
-import axios from 'axios';
-import styled from 'styled-components';
+import { useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
-// import BottomOrder from '../components/BottomOrder';
-// import Header from '../components/Header';
+import styled from 'styled-components';
+
 import ItemBox from '../components/order-page/ItemBox';
+import LoadingText from '../components/order-page/LoadingText';
+import useQuantityPriceStroe from '../store/useStroe';
+import getEvent from '../util/http';
 
 interface ItemProps {
   id: string;
@@ -11,40 +13,37 @@ interface ItemProps {
   event: number;
   materialType: number;
   price: number;
+  quantity?: number;
 }
 
 function OrderPage() {
-  async function getEvent() {
-    const response = await axios
-      .get('http://localhost:3001/items')
-      .then(({ data }) => data);
-    return response;
-  }
+  const { items, setItems } = useQuantityPriceStroe();
 
-  const {
-    data, isPending, isError, error,
-  } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: ['items'],
-    queryFn: getEvent,
+    queryFn: ({ signal }) => getEvent({ signal }),
   });
 
-  console.log(data);
-  console.log(isError);
-  console.log(error);
+  // 데이터 쥬스탠드 상태에 넣기
+  useEffect(() => {
+    setItems(data);
+  }, [setItems, data]);
 
   return (
     <Container>
-      {/* <Header /> */}
-      {isPending && (
-        <div>
-          <p>목록을</p>
-          <p>불러오고 있습니다.</p>
-        </div>
-      )}
+      {isPending && <LoadingText />}
+      {isError && <LoadingText text="불러오기에 실패했습니다." />}
       <ul>
-        {data
-          && data.map((item: ItemProps) => (
-            <ItemBox name={item.name} event={item.event} price={item.price} />
+        {items
+          && items.map((item: ItemProps) => (
+            <ItemBox
+              key={item.id}
+              name={item.name}
+              event={item.event}
+              price={item.price}
+              id={item.id}
+              quantity={item.quantity || 0}
+            />
           ))}
       </ul>
     </Container>

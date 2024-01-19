@@ -1,33 +1,32 @@
 import styled from 'styled-components';
-import { FiMinus, FiPlus } from 'react-icons/fi';
+
+// import { useState } from 'react';
+import QuantityPrice from './QuantityPrice';
 
 interface ItemBoxProps {
   name: string;
   event: number;
   price: number;
+  id: string;
+  quantity: number;
 }
 
-function ItemBox({ name, event, price }: ItemBoxProps) {
+interface ContentProps {
+  $count: number;
+}
+
+function ItemBox({
+  name, event, price, id, quantity,
+}: ItemBoxProps) {
   return (
-    <Container>
-      <div className="box">박스</div>
+    <Container $count={quantity}>
+      <div className="box" />
       <ContentDiv>
         <TitleDiv>
           <div className="name">{name}</div>
           {event && <div className="event-box">이벤트</div>}
         </TitleDiv>
-        <QuantityPriceDiv>
-          <div>
-            <button type="button" aria-label="minus-button">
-              <FiMinus />
-            </button>
-            <span className="quantity">0</span>
-            <button type="button" aria-label="plus-button">
-              <FiPlus />
-            </button>
-          </div>
-          <div>{price}</div>
-        </QuantityPriceDiv>
+        <QuantityPrice price={price} id={id} quantity={quantity} />
       </ContentDiv>
     </Container>
   );
@@ -35,7 +34,7 @@ function ItemBox({ name, event, price }: ItemBoxProps) {
 
 export default ItemBox;
 
-const Container = styled.li`
+const Container = styled.li<ContentProps>`
   display: flex;
 
   width: 301px;
@@ -44,6 +43,8 @@ const Container = styled.li`
   margin-top: 18px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.3);
+  /* 카운터가 1이상이면 색상 변경 */
+  background-color: ${(props) => (props.$count === 0 ? '#ffffff' : 'rgba(247, 90, 47, 0.1)')};
 
   .box {
     width: 62px;
@@ -54,7 +55,6 @@ const Container = styled.li`
 `;
 
 const ContentDiv = styled.div`
-  background-color: beige;
   display: flex;
   flex-grow: 1;
   justify-content: space-between;
@@ -82,21 +82,5 @@ const TitleDiv = styled.div`
 
     font-size: 13px;
     color: white;
-  }
-`;
-
-const QuantityPriceDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  font-size: 18px;
-
-  .quantity {
-    margin: 0px 5px;
-  }
-
-  button {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
   }
 `;
