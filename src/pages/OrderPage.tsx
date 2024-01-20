@@ -24,6 +24,8 @@ function OrderPage() {
   const { data, isPending } = useQuery({
     queryKey: ['items'],
     queryFn: ({ signal }) => getEvent({ signal }),
+    // 캐시 저장 10초
+    staleTime: 10 * 1000,
   });
 
   // get응답 데이터 전역상태에 넣기
